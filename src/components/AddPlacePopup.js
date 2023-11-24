@@ -1,33 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
+import { useForm } from "./hooks/useForm";
 
 function AddPlacePopup({ isOpen, onAddPlace, onClose }) {
- 
-  const [ place, setPlace ] = useState('');
-  const [ link, setLink ] = useState('');
+  const { values, handleChange, setValues } = useForm({
+    place: "",
+    link: "",
+  });
 
   function handleSubmit(e) {
     e.preventDefault();
-    onAddPlace({
-      place,
-      link
-    })
-  }
-
-  const handleChangePlace = (e) => {
-    setPlace(e.target.value);
-  }
-
-  const handleChangeLink = (e) => {
-    setLink(e.target.value);
+    onAddPlace(values);
+    setValues({ 
+      place: "",
+      link: ""
+    });
   }
 
   useEffect(() => {
     if(!isOpen) {
-      setPlace('');
-      setLink('');
+      setValues({
+        place: "",
+        link: ""
+      })
     }
-  }, [isOpen]);
+  }, [isOpen, setValues]);
 
 
   return (
@@ -37,10 +34,11 @@ function AddPlacePopup({ isOpen, onAddPlace, onClose }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      buttonText={"Добавить"}
     >
       <input
-        onChange={handleChangePlace}
-        value={place}
+        onChange={handleChange}
+        value={values.place}
         id="place"
         className="popup__item"
         name="place"
@@ -55,8 +53,8 @@ function AddPlacePopup({ isOpen, onAddPlace, onClose }) {
         className="popup__input-error" 
       />
       <input
-        onChange={handleChangeLink}
-        value={link}
+        onChange={handleChange}
+        value={values.link}
         id="link"
         className="popup__item"
         name="link"

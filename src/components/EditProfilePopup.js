@@ -1,32 +1,30 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import PopupWithForm from "./PopupWithForm";
 import CurrentUserContext from "../contexts/CurrentUserContext";
+import { useForm } from "./hooks/useForm";
 
 function EditProfilePopup({ isOpen, onUpdateUser, onClose }) {
   const currentUser = useContext(CurrentUserContext);
-  const [ name, setName ] = useState(currentUser.name)
-  const [ about, setAbout ] = useState(currentUser.about)
+  const { values, handleChange, setValues } = useForm({
+    name: currentUser.name || "",
+    about: currentUser.about || "",
+  });
  
   useEffect(() => {
-    setName(currentUser.name)
-    setAbout(currentUser.about)
-  }, [currentUser, isOpen]);
+    if (isOpen) {
+      setValues({
+        name: currentUser.name || "",
+        about: currentUser.about || "",
+      });
+    }
+  }, [isOpen, currentUser, setValues]);
 
-
-  function handleChangeName(e) {
-    setName(e.target.value)
-  }
-
-  function handleChangeAbout(e) {
-    setAbout(e.target.value)
-  }
-  
   function handleSubmit(e) {
     e.preventDefault();
     onUpdateUser({
-      name,
-      about: about
-    })
+      name: values.name,
+      about: values.about,
+    });
   }
 
   return (
@@ -36,6 +34,7 @@ function EditProfilePopup({ isOpen, onUpdateUser, onClose }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      buttonText={"Сохранить"}
     >
       <input
         id="name"
@@ -46,8 +45,8 @@ function EditProfilePopup({ isOpen, onUpdateUser, onClose }) {
         required
         minLength="2"
         maxLength="40"
-        value={name}
-        onChange={handleChangeName}
+        value={values.name}
+        onChange={handleChange}
       />
       <span 
         id="name-input-error" 
@@ -62,8 +61,8 @@ function EditProfilePopup({ isOpen, onUpdateUser, onClose }) {
         required
         minLength="2"
         maxLength="200"
-        value={about}
-        onChange={handleChangeAbout}
+        value={values.about}
+        onChange={handleChange}
       />
       <span 
         id="name-input-error" 

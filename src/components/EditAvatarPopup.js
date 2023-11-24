@@ -18,6 +18,7 @@ function EditAvatarPopup({ isOpen, onUpdateAvatar, onClose }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      buttonText={"Подтвердить"}
     >
       <input
         ref={avatarRef}

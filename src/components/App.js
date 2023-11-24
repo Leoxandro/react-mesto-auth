@@ -217,7 +217,7 @@ function App() {
           console.log('400 — Переданный токен некорректен');
         });
     }
-  }, [isLoggedIn]);
+  }, [navigate]);
 
   function onLogin({ password, email }) {
     auth

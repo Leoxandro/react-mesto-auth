@@ -8,7 +8,7 @@
 
 @media (min-width: 620px) {
   .auth__signin_btn {
-    margin: 15px auto 80px;
+    margin: 15px auto 80px 5px;
   }
 }
 
