@@ -18,49 +18,51 @@ function AuthForm({ title, onSubmit, buttonText, onSwitch, switchText }) {
   };
 
   return (
-    <main className="content">
+    <>
       <Header title={switchText} onClick={handleSwitch} />
-      <form className="auth__form" onSubmit={handleSubmit}>
-        <h2 className="auth__title">{title}</h2>
-        <input
-          className="auth__form-input"
-          placeholder="Email"
-          name="email"
-          type="email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email || ""}
-          maxLength="40"
-          minLength="2"
-          required
-        ></input>
-        <input
-          className="auth__form-input"
-          placeholder="Пароль"
-          name="password"
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password || ""}
-          maxLength="40"
-          minLength="2"
-          required
-        ></input>
-        <button className="auth__form-submit-btn" type="submit">
-          {buttonText}
-        </button>
-        {switchText && (
-          <div className="auth__signin">
-            <p className="auth__signin_text">{switchText}</p>
-            <button
-              className="auth__signin_btn"
-              type="button"
-              onClick={handleSwitch}
-            >
-              Войти
-            </button>
-          </div>
-        )}
-      </form>
-    </main>
+      <main className="content">
+        <form className="auth__form" onSubmit={handleSubmit}>
+          <h2 className="auth__title">{title}</h2>
+          <input
+            className="auth__form-input"
+            placeholder="Email"
+            name="email"
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email || ""}
+            maxLength="40"
+            minLength="2"
+            required
+          ></input>
+          <input
+            className="auth__form-input"
+            placeholder="Пароль"
+            name="password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password || ""}
+            maxLength="40"
+            minLength="2"
+            required
+          ></input>
+          <button className="auth__form-submit-btn" type="submit">
+            {buttonText}
+          </button>
+          {switchText && (
+            <div className="auth__signin">
+              <p className="auth__signin_text">{switchText}</p>
+              <button
+                className="auth__signin_btn"
+                type="button"
+                onClick={handleSwitch}
+              >
+                Войти
+              </button>
+            </div>
+          )}
+        </form>
+      </main>
+    </>
   );
 }
 

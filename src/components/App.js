@@ -15,6 +15,7 @@ import * as auth from '../utils/auth';
 import Main from './Main';
 import AccessIcon from '../images/AccessIcon.svg';
 import DenyIcon from '../images/DenyIcon.svg';
+import MainContent from "./MainContent.js";
 
 
 function App() {
@@ -273,35 +274,36 @@ function App() {
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
-        <Routes>
-          <Route 
-            path="/sign-in" 
-            element={<Login onLogin={onLogin} />}
-          />
-          <Route
-            path="/sign-up"
-            element={<Register onRegister={onRegister} />}
-          />
-          <Route
-            path='/'
-            element={
-              <ProtectedRoute 
-                element={Main}
-                isLoggedIn={isLoggedIn}
-                onEditAvatar={handleEditAvatarClick}
-                onEditProfile={handleEditProfileClick}
-                onAddPlace={handleAddPlaceClick}
-                onCardClick={handleCardClick}
-                onCardLike={handleCardLike}
-                onCardDelete={handleCardDelete}
-                cards={cards}
-                email={email}
-                onSignOut={onSignOut}
-              />
-            }
-          />
-        </Routes>
-
+        <MainContent>
+          <Routes>
+            <Route 
+              path="/sign-in" 
+              element={<Login onLogin={onLogin} />}
+            />
+            <Route
+              path="/sign-up"
+              element={<Register onRegister={onRegister} />}
+            />
+            <Route
+              path='/'
+              element={
+                <ProtectedRoute 
+                  element={Main}
+                  isLoggedIn={isLoggedIn}
+                  onEditAvatar={handleEditAvatarClick}
+                  onEditProfile={handleEditProfileClick}
+                  onAddPlace={handleAddPlaceClick}
+                  onCardClick={handleCardClick}
+                  onCardLike={handleCardLike}
+                  onCardDelete={handleCardDelete}
+                  cards={cards}
+                  email={email}
+                  onSignOut={onSignOut}
+                />
+              }
+            />
+          </Routes>
+        </MainContent>      
         <EditAvatarPopup
           isOpen={isUpdateEditAvatarPopupOpen}
           onClose={closeAllPopups}

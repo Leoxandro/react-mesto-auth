@@ -39,76 +39,78 @@ function Main(props) {
   }`;
 
   return (
-    <main className="content">
+    <>
       <Header 
         title='Выход'
         email={email}
         isOpen={true}
         onSignOut={onSignOut}
       />
-      <section className="profile">
-        <div 
-          className="profile__avatar-area"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <img
-            className={avatarVisibility}
-            src={currentUser.avatar}
-            alt={currentUser.name}
-            onClick={onEditAvatar}
-          />
-          <button
-            type="button"
-            className={avatarEditHover}
-            onClick={onEditAvatar}
-            aria-label="Редактировать аватар профиля"
-          />
-        </div>
-        <div className="profile__description">
-          <div className="profile__info">
-            <h1 className="profile__author" id="profile__author">
-              {currentUser.name}
-            </h1>
+      <main className="content">
+        <section className="profile">
+          <div 
+            className="profile__avatar-area"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <img
+              className={avatarVisibility}
+              src={currentUser.avatar}
+              alt={currentUser.name}
+              onClick={onEditAvatar}
+            />
             <button
-              onClick={onEditProfile}
               type="button"
-              className="profile__btn profile__btn_action_edit"
-              title="Кнопка редактирования профиля"
+              className={avatarEditHover}
+              onClick={onEditAvatar}
+              aria-label="Редактировать аватар профиля"
             />
           </div>
-          <p
-            className="profile__author-description"
-            id="profile__author-description"
-          >
-            {currentUser.about}
-          </p>
-        </div>
-        <button
-          onClick={onAddPlace}
-          type="button"
-          className="profile__btn profile__btn_action_add"
-          title="Кнопка добавления фото"
-        />
-      </section>
-
-      <section className="elements">
-        {cards.map((card) => (
-          <Card
-            isOwn={card.owner}
-            key={card._id}
-            name={card.name}
-            img={card.link}
-            likes={card.likes}
-            id={card._id}
-            onCardClick={onCardClick}
-            onCardDelete={onCardDelete}
-            onCardLike={onCardLike}
+          <div className="profile__description">
+            <div className="profile__info">
+              <h1 className="profile__author" id="profile__author">
+                {currentUser.name}
+              </h1>
+              <button
+                onClick={onEditProfile}
+                type="button"
+                className="profile__btn profile__btn_action_edit"
+                title="Кнопка редактирования профиля"
+              />
+            </div>
+            <p
+              className="profile__author-description"
+              id="profile__author-description"
+            >
+              {currentUser.about}
+            </p>
+          </div>
+          <button
+            onClick={onAddPlace}
+            type="button"
+            className="profile__btn profile__btn_action_add"
+            title="Кнопка добавления фото"
           />
-        ))}
-      </section>
+        </section>
+
+        <section className="elements">
+          {cards.map((card) => (
+            <Card
+              isOwn={card.owner}
+              key={card._id}
+              name={card.name}
+              img={card.link}
+              likes={card.likes}
+              id={card._id}
+              onCardClick={onCardClick}
+              onCardDelete={onCardDelete}
+              onCardLike={onCardLike}
+            />
+          ))}
+        </section>
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }
 
